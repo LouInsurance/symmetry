@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luis De La Cruz | Underwriter</title>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
+body { color: white; overflow-x: hidden; }
+
+/* Background Video */
+video.bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.overlay-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
+
+/* Blur Gate */
+#gate {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(16px);
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: opacity .6s ease;
+}
+#gate h1 {
+  border: 2px solid white;
+  padding: 20px 30px;
+  font-size: 1.8rem;
+}
+
+/* Sections */
+section { padding: 80px 10%; }
+.hero { min-height: 100vh; display: flex; align-items: center; }
+
+.hero img {
+  width: 140px; height: 140px;
+  border-radius: 50%; margin-bottom: 20px;
+}
+
+.btn {
+  background: #00b3ff;
+  padding: 14px 28px;
+  border: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Glass */
+.glass {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px;
+}
+
+/* About */
+.about { display: flex; gap: 40px; flex-wrap: wrap; }
+.about img { width: 260px; border-radius: 14px; }
+
+/* Video Thumbnails */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 20px;
+}
+.video-thumb {
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Modals */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+.modal-content {
+  background: #000;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+}
+.modal video { width: 100%; }
+
+/* Lead Form */
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* Floating Buttons */
+.fab {
+  position: fixed;
+  right: 20px;
+  z-index: 30;
+}
+.fab a {
+  display: block;
+  margin-bottom: 10px;
+  background: #00b3ff;
+  padding: 14px;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Footer */
+footer { text-align: center; padding: 40px; font-size: .9rem; opacity: .85; }
+</style>
+</head>
+
+<body>
+
+<video id="bgVideo" class="bg" muted playsinline loop>
+  <source src="beachvideo.mp4" type="video/mp4">
+</video>
+<div class="overlay-bg"></div>
+
+<!-- ENTRY GATE -->
+<div id="gate"><h1>Click to view your agent’s information</h1></div>
+
+<!-- FLOATING BUTTONS -->
+<div class="fab">
+  <a href="tel:15208413654">📞</a>
+  <a href="mailto:luisdelacruz.insurance@gmail.com">✉️</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <img src="websitepicture3.jpg">
+    <h1>LUIS DE LA CRUZ</h1>
+    <h3>Underwriter</h3><br>
+    <a href="#lead" class="btn">Book a complementary session</a>
+    <a href="tel:15208413654" class="btn">📞 Text "Protection" to get started</a>
+    <a href="mailto:luisdelacruz.insurance@gmail.com" class="btn">✉️ Send Email</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+<div class="glass about">
+  <img src="hero.jpg">
+  <div>
+    <h2>About Me</h2><br>
+    <p>
+      My name is <strong>Luis De La Cruz</strong>, and I help individuals and families
+      make confident decisions around life insurance and financial protection.
+      My approach is education first, guidance second, and zero pressure.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- VIDEOS -->
+<section>
+<div class="glass">
+<h2>Videos</h2><br>
+<div class="video-grid">
+  <div class="video-thumb" onclick="openVideo('video1.mp4')">▶ Watch Video 1</div>
+  <div class="video-thumb" onclick="openVideo('video2.mp4')">▶ Watch Video 2</div>
+</div>
+</div>
+</section>
+
+<!-- LEAD CAPTURE -->
+<section id="lead">
+<div class="glass">
+<h2>Get Started</h2><br>
+
+<input id="name" placeholder="Full Name" required>
+<input id="email" placeholder="Email Address" required>
+<input id="phone" placeholder="Phone Number" required>
+
+<input id="age" placeholder="Age">
+<input id="height" placeholder="Height (e.g. 5'10&quot;)">
+<input id="weight" placeholder="Weight (lbs)">
+
+<select id="tobacco" required>
+  <option value="">Do you use tobacco?</option>
+  <option value="No">No</option>
+  <option value="Yes">Yes</option>
+</select>
+
+<br><br>
+<button class="btn" onclick="unlockCalendly()">Continue to Booking</button>
+</div>
+</section>
+
+<!-- CALENDLY -->
+<section id="calendly" style="display:none;">
+<div class="glass">
+<iframe src="https://calendly.com/louinsurance" width="100%" height="700"></iframe>
+</div>
+</section>
+
+<!-- VIDEO MODAL -->
+<div class="modal" id="videoModal" onclick="closeVideo()">
+  <div class="modal-content">
+    <video id="modalVideo" controls></video>
+  </div>
+</div>
+
+<!-- COMPLIANCE MODAL -->
+<div class="modal" id="disclaimer" style="display:flex;">
+<div class="modal-content">
+<h3>Disclosure</h3><br>
+<p>
+This site is for informational purposes only and does not constitute financial advice.
+Coverage availability and benefits vary by carrier and state.
+</p><br>
+<button class="btn" onclick="closeDisclaimer()">I Understand</button>
+</div>
+</div>
+
+<footer>
+NPN: 21090841<br>
+Licensed in: AZ, HI, VA, MI, NM, OH, TX<br>
+Symmetry Financial Group
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+const gate = document.getElementById("gate");
+const modalVideo = document.getElementById("modalVideo");
+const videoModal = document.getElementById("videoModal");
+const disclaimer = document.getElementById("disclaimer");
+
+gate.onclick = () => {
+  gate.style.opacity = 0;
+  setTimeout(() => gate.remove(), 600);
+};
+
+function openVideo(src){
+  modalVideo.src = src;
+  videoModal.style.display = "flex";
+}
+function closeVideo(){
+  modalVideo.pause();
+  videoModal.style.display = "none";
+}
+
+function closeDisclaimer(){
+  disclaimer.style.display = "none";
+}
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_CgglACqKr5fgxKRLBHBGTvHFvT44yokiyDBEzsaJeUIj8zAEthkA9DoFcry_Jf_o/exec";
+
+function isValidPhone(phone) {
+  return phone.replace(/\D/g, "").length === 10;
+}
+
+function unlockCalendly() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const age = document.getElementById("age")?.value || "";
+  const height = document.getElementById("height")?.value || "";
+  const weight = document.getElementById("weight")?.value || "";
+  const tobacco = document.getElementById("tobacco")?.value || "";
+
+  if (!name || !email || !phone || !tobacco) {
+    alert("Please complete all required fields.");
+    return;
+  }
+
+  if (!isValidPhone(phone)) {
+    alert("Please enter a valid 10-digit phone number.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("age", age);
+  formData.append("height", height);
+  formData.append("weight", weight);
+  formData.append("tobacco", tobacco);
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: formData
+  })
+  .then(() => {
+    document.getElementById("calendly").style.display = "block";
+    location.hash = "#calendly";
+  })
+  .catch(() => {
+    alert("Submission failed. Please try again.");
+  });
+}
+</script>
+
+</body>
+</html>
